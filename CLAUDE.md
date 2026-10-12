@@ -9,10 +9,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run lint` — ESLint (flat config, JS/JSX only)
 - `npm run preview` — Preview production build
 
+There is no test runner or test script configured.
+
 ## Repository Structure
 
 ```
 job-portal-ui/
+├── dist/                 # Build output (gitignored)
 ├── public/               # Static assets (favicons, company logos)
 ├── src/
 │   ├── components/       # Reusable UI components (Navbar, Footer, Layout, ProtectedRoute, etc.)
@@ -115,7 +118,7 @@ Flat config (`eslint.config.js`). The `no-unused-vars` rule ignores variables st
 
 ## Architecture
 
-React 19 SPA using Vite 7, Tailwind CSS 4, and React Router 7. No TypeScript — plain JSX throughout.
+React 19 SPA using Vite 7, Tailwind CSS 4, and React Router 7 (`react-router-dom`). No TypeScript — plain JSX throughout.
 
 ### State Management
 
@@ -138,13 +141,9 @@ Three roles with route protection via `ProtectedRoute` component:
 
 - **ROLE_JOB_SEEKER** — profile, applied-jobs, saved-jobs
 - **ROLE_EMPLOYER** — post-job, employer/jobs, job-applicants/:jobId
-- **ROLE_ADMIN** — admin/\*, admin pages in `src/pages/admin/`
+- **ROLE_ADMIN** — admin, admin/companies, admin/employers, admin/contact-messages (pages in `src/pages/admin/`)
 
 ### Key Libraries
 
 - Font Awesome + Lucide React for icons
 - react-toastify for notifications
-
-### ESLint
-
-Flat config (`eslint.config.js`). The `no-unused-vars` rule ignores variables starting with uppercase or underscore (`varsIgnorePattern: '^[A-Z_]'`).
